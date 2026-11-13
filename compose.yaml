@@ -1,0 +1,14 @@
+services:
+  web:
+    build: .
+    ports:
+      - "5001:5001"
+    volumes:
+      # SQLite database + uploaded photos live here; bind-mounted so the
+      # collection survives rebuilds and stays visible on the host.
+      - ./instance:/app/instance
+    environment:
+      # keep "today" on local time, not UTC, so the daily pick
+      # rolls over at your midnight
+      TZ: Europe/Budapest
+    restart: unless-stopped

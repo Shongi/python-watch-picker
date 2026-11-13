@@ -1,0 +1,13 @@
+venv/
+instance/
+__pycache__/
+*.pyc
+.pytest_cache/
+.DS_Store
+
+# Local environment and editor files
+.env
+.claude/
+.idea/
+.vscode/
+*.swp

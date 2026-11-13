@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Add a watch{% endblock %}
+
+{% block content %}
+  <div class="form-container">
+    <h2>Add a new watch</h2>
+    <form method="post" enctype="multipart/form-data">
+      <label>
+        Brand
+        <input type="text" name="brand" value="{{ brand }}" required>
+      </label>
+      <label>
+        Name
+        <input type="text" name="name" value="{{ name }}" required>
+      </label>
+      <label>
+        Photo
+        <input type="file" name="photo" accept=".jpg,.jpeg,.png,.webp" required>
+      </label>
+      <button type="submit" class="primary-button">Add watch</button>
+    </form>
+  </div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Today's watch{% endblock %}
+
+{% block content %}
+  <div class="show-container">
+    <h2>The watch for the day is {{ watch['brand'] }} {{ watch['name'] }}</h2>
+
+    <div class="watch-show-card">
+      <img class="watch-image"
+           src="{{ url_for('watches.image', filename=watch['image_filename']) }}"
+           alt="{{ watch['brand'] }} {{ watch['name'] }} watch">
+    </div>
+
+    <div class="actions">
+      <a href="{{ url_for('watches.index') }}" class="back-button">Back to Collection</a>
+    </div>
+  </div>
+{% endblock %}

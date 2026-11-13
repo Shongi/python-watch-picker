@@ -1,0 +1,14 @@
+CREATE TABLE IF NOT EXISTS watches (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    brand TEXT NOT NULL,
+    name TEXT NOT NULL,
+    image_filename TEXT NOT NULL,
+    archived INTEGER NOT NULL DEFAULT 0,
+    created_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE TABLE IF NOT EXISTS picks (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    watch_id INTEGER NOT NULL REFERENCES watches(id),
+    picked_on TEXT NOT NULL UNIQUE
+);

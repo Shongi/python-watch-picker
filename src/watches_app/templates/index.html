@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% if today %}
+    <div class="today-banner">
+      Today's watch: <strong>{{ today['brand'] }} {{ today['name'] }}</strong>
+      — <a href="{{ url_for('watches.today') }}">see it</a>
+    </div>
+  {% else %}
+    <form action="{{ url_for('watches.pick') }}" method="post">
+      <button type="submit" class="primary-button">Pick today's watch</button>
+    </form>
+  {% endif %}
+
+  {% if not watches %}
+    <div class="empty-state">
+      <p>No watches yet. <a href="{{ url_for('watches.new_watch') }}">Add your first one!</a></p>
+    </div>
+  {% else %}
+    <div class="watch-grid">
+      {% for watch in watches %}
+        <div class="watch-card {{ 'worn-this-round' if watch['pick_count'] > fewest }}">
+          <img class="watch-image" loading="lazy"
+               src="{{ url_for('watches.image', filename=watch['image_filename']) }}"
+               alt="{{ watch['brand'] }} {{ watch['name'] }} watch">
+          <div class="watch-info">
+            {{ watch['brand'] }} – {{ watch['name'] }}
+            {% if watch['pick_count'] > fewest %}
+              <span class="badge">worn this round</span>
+            {% endif %}
+          </div>
+          <form action="{{ url_for('watches.archive', watch_id=watch['id']) }}" method="post"
+                onsubmit="return confirm('Remove {{ watch['brand'] }} {{ watch['name'] }} from the rotation?');">
+            <button type="submit" class="archive-button" title="Remove from rotation">✕</button>
+          </form>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endblock %}

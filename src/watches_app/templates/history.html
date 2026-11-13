@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Wear history{% endblock %}
+
+{% block content %}
+  <div class="history-container">
+    <h2>Wear history</h2>
+    {% if not picks %}
+      <div class="empty-state"><p>No picks yet.</p></div>
+    {% else %}
+      <ul class="history-list">
+        {% for pick in picks %}
+          <li>
+            <img class="history-thumb" loading="lazy"
+                 src="{{ url_for('watches.image', filename=pick['image_filename']) }}"
+                 alt="{{ pick['brand'] }} {{ pick['name'] }} watch">
+            <span class="history-date">{{ pick['picked_on'] }}</span>
+            <span>{{ pick['brand'] }} – {{ pick['name'] }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+{% endblock %}
